@@ -1,0 +1,117 @@
+name: nginx-plus-upstream-servers
+version: 1.0
+rundeckPluginVersion: 1.2
+author: Douglas Barahona
+date: 2019-07-23
+#description: Step plugin to drain and add servers to Nginx Plus upstreams
+providers:
+  - name: nginx-plus-upstream-drain-server
+    title: Nginx Plus upstream drain server
+    description: Drain servers from Nginx Plus upstream
+    service: WorkflowNodeStep
+    plugin-type: script
+    script-file: drain.sh
+    script-args: ${node.hostname}
+    config:
+      - type: String
+        name: api_url
+        title: API URL
+        description: Nginx Plus API URL
+        required: true
+      - type: String
+        name: backup_api_url
+        title: Backup API URL
+        description: Nginx Plus API URL for backup server
+        required: false
+      - type: String
+        name: upstream
+        title: Upstream name
+        description: Name of the upstream
+        required: true
+      - type: Select
+        name: authentication_method
+        title: Authentication method
+        description: Authentication method
+        default: none
+        values:
+        - none
+        - password
+        required: true
+        renderingOptions:
+          groupName: Authentication
+          grouping: secondary
+      - type: String
+        name: username
+        title: Username
+        description: Nginx Plus API username
+        required: false
+        renderingOptions:
+          groupName: Authentication
+          grouping: secondary
+      - type: String
+        name: password
+        title: Password
+        description: Nginx Plus API password
+        required: false
+        renderingOptions:
+          groupName: Authentication
+          grouping: secondary
+          displayType: PASSWORD
+          selectionAccessor: "STORAGE_PATH"
+          valueConversion: "STORAGE_PATH_AUTOMATIC_READ"
+          storage-path-root: "keys"
+  - name: nginx-plus-upstream-up-server
+    title: Nginx Plus upstream up server
+    description: Put servers back in "up" state in Nginx Plus upstream
+    service: WorkflowNodeStep
+    plugin-type: script
+    script-file: up.sh
+    script-args: ${node.hostname}
+    config:
+      - type: String
+        name: api_url
+        title: API URL
+        description: Nginx Plus URL API
+        required: true
+      - type: String
+        name: backup_api_url
+        title: Backup API URL
+        description: Nginx Plus API URL for backup server
+        required: false
+      - type: String
+        name: upstream
+        title: Upstream name
+        description: Name of the upstream
+        required: true
+      - type: Select
+        name: authentication_method
+        title: Authentication method
+        description: Authentication method
+        default: none
+        values:
+        - none
+        - password
+        required: true
+        renderingOptions:
+          groupName: Authentication
+          grouping: secondary
+      - type: String
+        name: username
+        title: Username
+        description: Nginx Plus API username
+        required: false
+        renderingOptions:
+          groupName: Authentication
+          grouping: secondary
+      - type: String
+        name: password
+        title: Password
+        description: Nginx Plus API password
+        required: false
+        renderingOptions:
+          groupName: Authentication
+          grouping: secondary
+          displayType: PASSWORD
+          selectionAccessor: "STORAGE_PATH"
+          valueConversion: "STORAGE_PATH_AUTOMATIC_READ"
+          storage-path-root: "keys"
