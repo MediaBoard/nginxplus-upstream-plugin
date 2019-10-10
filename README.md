@@ -1,3 +1,4 @@
+![](https://github.com/actions/nginxplus-upstream-plugin/workflows/Build_plugin/badge.svg)
 # Nginx Plus Upstream Servers
 
 Rundeck node step plugin to drain and restore servers from Nginx Plus upstreams.
