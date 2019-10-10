@@ -11,3 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build plugin
       run: ./build.sh
+    - uses: actions/upload-artifact@master
+      with:
+        name: rundeck-nginxplus-upstream-plugin.zip
+        path: build/rundeck-nginxplus-upstream-plugin.zip
